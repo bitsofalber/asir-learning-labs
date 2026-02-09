@@ -1,4 +1,4 @@
-# tech4u_content
+# asir-learning-labs
 Laboratorios prácticos y apuntes de la FP ASIR (Linux, redes, BBDD y seguridad).
 # ASIR Labs
 

@@ -1,13 +1,13 @@
+
 -- ============================================================
 -- CONSULTAS CON INNER JOIN
 -- ============================================================
 
 -- 1. Unimos empleados con sus departamentos (INNER JOIN).
-`SELECT e.nombre, d.nombre
+SELECT e.nombre, d.nombre
 FROM empleados e
 INNER JOIN dptos d
 ON e.id = d.id;
-`
 
 -- 2. Obtenemos el nombre del empleado y el nombre de su departamento.
 SELECT e.nombre AS empleado, d.nombre AS departamento
@@ -53,54 +53,55 @@ ON e.id = d.id
 ORDER BY d.nombre ASC;
 
 
+⸻
 
- ============================================================
- APUNTES SOBRE ALIAS EN INNER JOIN
- ============================================================
+
+-- ============================================================
+-- APUNTES SOBRE ALIAS EN INNER JOIN
+-- ============================================================
 
 -- Usar alias en una consulta NO cambia el resultado.
 -- Solo sirve para escribir consultas más cortas y legibles.
 
- Cuando escribimos:
 -- FROM empleados e
 -- La letra "e" representa a la tabla empleados.
 
-Cuando escribimos:
 -- FROM dptos d
 -- La letra "d" representa a la tabla dptos.
 
- Por tanto:
+-- Por tanto:
 -- e.dni      = empleados.dni
 -- e.nombre   = empleados.nombre
 -- e.salario  = empleados.salario
 -- d.nombre   = dptos.nombre
 
- Estas dos consultas son equivalentes:
+-- Estas dos consultas son equivalentes:
 
- Con alias:
-
+-- Con alias:
 SELECT e.dni, e.nombre, e.salario, d.nombre
 FROM empleados e
 INNER JOIN dptos d
 ON e.id = d.id;
 
-Sin alias:
-
+-- Sin alias:
 SELECT empleados.dni, empleados.nombre, empleados.salario, dptos.nombre
 FROM empleados
 INNER JOIN dptos
 ON empleados.id = dptos.id;
 
- Regla clave:
- Todo lo que empieza por "e." pertenece a empleados.
- Todo lo que empieza por "d." pertenece a dptos.
+-- Regla clave:
+-- Todo lo que empieza por "e." pertenece a empleados.
+-- Todo lo que empieza por "d." pertenece a dptos.
 
 
- ============================================================
- EJERCICIOS CON INNER JOIN + GROUP BY (CON RESULTADOS)
- ============================================================
+⸻
 
- EJERCICIO 1
+
+-- ============================================================
+-- EJERCICIOS CON INNER JOIN + GROUP BY (CON RESULTADOS)
+-- ============================================================
+
+-- EJERCICIO 1
 -- Mostrar los empleados con el nombre de su departamento.
 SELECT e.dni, e.nombre, e.salario, d.nombre
 FROM empleados e
@@ -116,39 +117,40 @@ ON e.id = d.id;
 -- 56789012E | Ana      | 27000 | Ciberseguridad
 -- 56789012R | AnaMaria | 28000 | Ciberseguridad
 
- ============================================================
- EXPLICACIÓN PASO A PASO DEL EJERCICIO 1
- ============================================================
- 
- 1. Queremos mostrar información de los empleados junto con el nombre del departamento al que pertenecen, 
--- El problema es que en la tabla empleados solo tenemos el ID del departamento no su nombre.
 
- 2. En el SELECT indicamos qué columnas queremos ver en el resultado final:
---    - e.dni      → el DNI del empleado
---    - e.nombre   → el nombre del empleado
---    - e.salario  → el salario del empleado
---    - d.nombre   → el nombre del departamento (tabla dptos)
+⸻
+
+
+-- ============================================================
+-- EXPLICACIÓN PASO A PASO DEL EJERCICIO 1
+-- ============================================================
+
+-- 1. Queremos mostrar información de los empleados junto con el nombre
+--    del departamento al que pertenecen. En la tabla empleados solo
+--    tenemos el ID del departamento, no su nombre.
+
+-- 2. Columnas seleccionadas:
+--    e.dni      → DNI del empleado
+--    e.nombre   → nombre del empleado
+--    e.salario  → salario del empleado
+--    d.nombre   → nombre del departamento
 SELECT e.dni, e.nombre, e.salario, d.nombre
 
- 3. Empezamos desde la tabla empleados porque queremos una fila por cada empleado.
+-- 3. Partimos de la tabla empleados.
 FROM empleados e
 
- 4. Usamos INNER JOIN para unir cada empleado con su departamento.
---    INNER JOIN solo mostrará empleados que tengan un departamento válido.
+-- 4. Unimos con la tabla dptos usando INNER JOIN.
 INNER JOIN dptos d
 
- 5. Condición del JOIN:
---    - e.id es el ID del departamento al que pertenece el empleado
---    - d.id es el ID del departamento en la tabla dptos
---    Cuando ambos IDs coinciden, SQL une las filas.
+-- 5. Condición del JOIN:
+--    e.id coincide con d.id
 ON e.id = d.id;
 
- 6. El resultado final muestra a cada empleado con el nombre de su departamento,
---    sustituyendo el ID del departamento por su nombre real.
 
- ============================================================
+⸻
 
- EJERCICIO 2
+
+-- EJERCICIO 2
 -- Obtener el número de empleados por departamento.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
@@ -162,8 +164,10 @@ GROUP BY d.nombre;
 -- RRHH             | 3
 
 
+⸻
 
- EJERCICIO 3
+
+-- EJERCICIO 3
 -- Obtener el departamento con más empleados.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
@@ -173,10 +177,8 @@ GROUP BY d.nombre
 ORDER BY total_empleados DESC
 LIMIT 1;
 
--- RESULTADO ESPERADO:
--- Ciberseguridad | 3
--- (o RRHH | 3, según el motor si hay empate)
 
+⸻
 
 
 -- EJERCICIO 4
@@ -187,14 +189,11 @@ INNER JOIN empleados e
 ON d.id = e.id
 GROUP BY d.nombre;
 
--- RESULTADO ESPERADO:
--- Contabilidad     | 28000
--- Ciberseguridad   | 32000
--- RRHH             | 40000
+
+⸻
 
 
-
- EJERCICIO 5
+-- EJERCICIO 5
 -- Obtener el salario medio por departamento ordenado de mayor a menor.
 SELECT d.nombre, AVG(e.salario) AS salario_medio
 FROM dptos d
@@ -203,14 +202,11 @@ ON d.id = e.id
 GROUP BY d.nombre
 ORDER BY salario_medio DESC;
 
--- RESULTADO ESPERADO:
--- RRHH           | 35000
--- Ciberseguridad | 29000
--- Contabilidad  | 28000
+
+⸻
 
 
-
- EJERCICIO 6
+-- EJERCICIO 6
 -- Obtener los departamentos que tienen más de 2 empleados.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
@@ -219,30 +215,22 @@ ON d.id = e.id
 GROUP BY d.nombre
 HAVING COUNT(*) > 2;
 
--- RESULTADO ESPERADO:
--- Ciberseguridad | 3
--- RRHH           | 3
+
+⸻
 
 
-
- EJERCICIO 7
+-- EJERCICIO 7
 -- Obtener el salario máximo de cada código postal.
 SELECT codigoPostal, MAX(salario) AS salario_maximo
 FROM empleados
 GROUP BY codigoPostal
 ORDER BY salario_maximo DESC;
 
--- RESULTADO ESPERADO:
--- 28004 | 40000
--- 28003 | 35000
--- 28002 | 32000
--- 28005 | 30000
--- 28001 | 28000
--- 28006 | 28000
+
+⸻
 
 
-
- EJERCICIO 8
+-- EJERCICIO 8
 -- Obtener el departamento con el salario máximo más alto.
 SELECT d.nombre, MAX(e.salario) AS salario_maximo
 FROM dptos d
@@ -252,9 +240,8 @@ GROUP BY d.nombre
 ORDER BY salario_maximo DESC
 LIMIT 1;
 
--- RESULTADO ESPERADO:
--- RRHH | 40000
 
+⸻
 
 
 -- EJERCICIO 9
@@ -265,11 +252,10 @@ INNER JOIN empleados e
 ON d.id = e.id
 GROUP BY d.nombre, e.genero;
 
--- RESULTADO ESPERADO:
--- Contabilidad   | F    | 1
--- Ciberseguridad | M    | 1
--- Ciberseguridad | NULL | 2
--- RRHH           | F    | 1
--- RRHH           | M    | 1
--- RRHH           | NULL | 1
 
+⸻
+
+Si quieres, en el siguiente paso puedo:
+	•	dividir esto en README.md bien estructurado
+	•	añadir explicaciones en texto fuera del código
+	•	o adaptarlo como apuntes de ASIR / SQL para examen

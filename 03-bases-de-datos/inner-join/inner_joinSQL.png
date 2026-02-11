@@ -3,10 +3,11 @@
 -- ============================================================
 
 -- 1. Unimos empleados con sus departamentos (INNER JOIN).
-SELECT e.nombre, d.nombre
+`SELECT e.nombre, d.nombre
 FROM empleados e
 INNER JOIN dptos d
 ON e.id = d.id;
+`
 
 -- 2. Obtenemos el nombre del empleado y el nombre de su departamento.
 SELECT e.nombre AS empleado, d.nombre AS departamento
@@ -271,3 +272,4 @@ GROUP BY d.nombre, e.genero;
 -- RRHH           | F    | 1
 -- RRHH           | M    | 1
 -- RRHH           | NULL | 1
+

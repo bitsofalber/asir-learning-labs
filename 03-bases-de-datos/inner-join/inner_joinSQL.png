@@ -10,12 +10,12 @@ INNER JOIN dptos d
 ON e.id = d.id;
 
 -- 2. Obtenemos el nombre del empleado y el nombre de su departamento.
-``sql
+```sql
 SELECT e.nombre AS empleado, d.nombre AS departamento
 FROM empleados e
 INNER JOIN dptos d
 ON e.id = d.id;
-``
+```
 
 -- 3. Contamos cuántos empleados hay en cada departamento.
 SELECT d.nombre, COUNT(*) AS total_empleados
@@ -261,4 +261,5 @@ Si quieres, en el siguiente paso puedo:
 	•	dividir esto en README.md bien estructurado
 	•	añadir explicaciones en texto fuera del código
 	•	o adaptarlo como apuntes de ASIR / SQL para examen
+
 

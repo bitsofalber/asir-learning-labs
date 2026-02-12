@@ -1,10 +1,4 @@
-## Esquema
-
-
-## Consulta SQL
-La consulta se encuentra en el archivo `inner_join.sql`.
-
-
+```sql
 -- ============================================================
 -- CONSULTAS CON INNER JOIN
 -- ============================================================
@@ -16,12 +10,10 @@ INNER JOIN dptos d
 ON e.id = d.id;
 
 -- 2. Obtenemos el nombre del empleado y el nombre de su departamento.
-```sql
 SELECT e.nombre AS empleado, d.nombre AS departamento
 FROM empleados e
 INNER JOIN dptos d
 ON e.id = d.id;
-```
 
 -- 3. Contamos cuántos empleados hay en cada departamento.
 SELECT d.nombre, COUNT(*) AS total_empleados
@@ -61,9 +53,6 @@ ON e.id = d.id
 ORDER BY d.nombre ASC;
 
 
-⸻
-
-
 -- ============================================================
 -- APUNTES SOBRE ALIAS EN INNER JOIN
 -- ============================================================
@@ -83,8 +72,6 @@ ORDER BY d.nombre ASC;
 -- e.salario  = empleados.salario
 -- d.nombre   = dptos.nombre
 
--- Estas dos consultas son equivalentes:
-
 -- Con alias:
 SELECT e.dni, e.nombre, e.salario, d.nombre
 FROM empleados e
@@ -97,20 +84,12 @@ FROM empleados
 INNER JOIN dptos
 ON empleados.id = dptos.id;
 
--- Regla clave:
--- Todo lo que empieza por "e." pertenece a empleados.
--- Todo lo que empieza por "d." pertenece a dptos.
-
-
-⸻
-
 
 -- ============================================================
--- EJERCICIOS CON INNER JOIN + GROUP BY (CON RESULTADOS)
+-- EJERCICIOS CON INNER JOIN + GROUP BY
 -- ============================================================
 
 -- EJERCICIO 1
--- Mostrar los empleados con el nombre de su departamento.
 SELECT e.dni, e.nombre, e.salario, d.nombre
 FROM empleados e
 INNER JOIN dptos d
@@ -126,40 +105,7 @@ ON e.id = d.id;
 -- 56789012R | AnaMaria | 28000 | Ciberseguridad
 
 
-⸻
-
-
--- ============================================================
--- EXPLICACIÓN PASO A PASO DEL EJERCICIO 1
--- ============================================================
-
--- 1. Queremos mostrar información de los empleados junto con el nombre
---    del departamento al que pertenecen. En la tabla empleados solo
---    tenemos el ID del departamento, no su nombre.
-
--- 2. Columnas seleccionadas:
---    e.dni      → DNI del empleado
---    e.nombre   → nombre del empleado
---    e.salario  → salario del empleado
---    d.nombre   → nombre del departamento
-SELECT e.dni, e.nombre, e.salario, d.nombre
-
--- 3. Partimos de la tabla empleados.
-FROM empleados e
-
--- 4. Unimos con la tabla dptos usando INNER JOIN.
-INNER JOIN dptos d
-
--- 5. Condición del JOIN:
---    e.id coincide con d.id
-ON e.id = d.id;
-
-
-⸻
-
-
 -- EJERCICIO 2
--- Obtener el número de empleados por departamento.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
 INNER JOIN empleados e
@@ -172,11 +118,7 @@ GROUP BY d.nombre;
 -- RRHH             | 3
 
 
-⸻
-
-
 -- EJERCICIO 3
--- Obtener el departamento con más empleados.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
 INNER JOIN empleados e
@@ -186,11 +128,7 @@ ORDER BY total_empleados DESC
 LIMIT 1;
 
 
-⸻
-
-
 -- EJERCICIO 4
--- Obtener el salario máximo por departamento.
 SELECT d.nombre, MAX(e.salario) AS salario_maximo
 FROM dptos d
 INNER JOIN empleados e
@@ -198,11 +136,7 @@ ON d.id = e.id
 GROUP BY d.nombre;
 
 
-⸻
-
-
 -- EJERCICIO 5
--- Obtener el salario medio por departamento ordenado de mayor a menor.
 SELECT d.nombre, AVG(e.salario) AS salario_medio
 FROM dptos d
 INNER JOIN empleados e
@@ -211,11 +145,7 @@ GROUP BY d.nombre
 ORDER BY salario_medio DESC;
 
 
-⸻
-
-
 -- EJERCICIO 6
--- Obtener los departamentos que tienen más de 2 empleados.
 SELECT d.nombre, COUNT(*) AS total_empleados
 FROM dptos d
 INNER JOIN empleados e
@@ -224,22 +154,14 @@ GROUP BY d.nombre
 HAVING COUNT(*) > 2;
 
 
-⸻
-
-
 -- EJERCICIO 7
--- Obtener el salario máximo de cada código postal.
 SELECT codigoPostal, MAX(salario) AS salario_maximo
 FROM empleados
 GROUP BY codigoPostal
 ORDER BY salario_maximo DESC;
 
 
-⸻
-
-
 -- EJERCICIO 8
--- Obtener el departamento con el salario máximo más alto.
 SELECT d.nombre, MAX(e.salario) AS salario_maximo
 FROM dptos d
 INNER JOIN empleados e
@@ -249,24 +171,10 @@ ORDER BY salario_maximo DESC
 LIMIT 1;
 
 
-⸻
-
-
 -- EJERCICIO 9
--- Obtener el número de empleados por género y departamento.
 SELECT d.nombre, e.genero, COUNT(*) AS total_empleados
 FROM dptos d
 INNER JOIN empleados e
 ON d.id = e.id
 GROUP BY d.nombre, e.genero;
-
-
-⸻
-
-Si quieres, en el siguiente paso puedo:
-	•	dividir esto en README.md bien estructurado
-	•	añadir explicaciones en texto fuera del código
-	•	o adaptarlo como apuntes de ASIR / SQL para examen
-
-
-
+```

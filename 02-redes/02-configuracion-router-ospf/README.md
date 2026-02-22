@@ -17,8 +17,6 @@ Explora los conceptos y configuraciones fundamentales:
 | ⚙️ **Configuración básica** | Activación del proceso OSPF y anuncio de redes | [Ver](#-configuración-básica) |
 | 🔍 **Verificación** | Comandos para comprobar vecinos y rutas | [Ver](#-verificación) |
 | 🧠 **Estados de adyacencia** | Fases del establecimiento de vecinos | [Ver](#-estados-de-adyacencia-ospf) |
-| 🔐 **Seguridad** | Autenticación y protección del protocolo | [Ver](#-seguridad-en-ospf) |
-| 🧪 **Troubleshooting** | Problemas comunes y soluciones | [Ver](#-problemas-comunes) |
 
 ---
 
